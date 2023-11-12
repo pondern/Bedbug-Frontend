@@ -18,9 +18,10 @@ function Buildings() {
     <div>
       <h1>All the Buildings!</h1>
       <div className="Buildings-container">
-        {buildings.map((building) => (
-          <Building buidling={building} />
-        ))}
+        {buildings &&
+          buildings.map((building) => (
+            <Building key={building.id} building={building} />
+          ))}
       </div>
     </div>
   );

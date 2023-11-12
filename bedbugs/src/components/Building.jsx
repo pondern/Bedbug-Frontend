@@ -5,8 +5,8 @@ function Building({ building }) {
     <div>
       <Link to={`/buildings/${building._id}`}>
         <img
-          className="building-images"
-          src={building.image}
+          className="building-photos"
+          src={building.photo}
           alt={building.name}
         />
       </Link>

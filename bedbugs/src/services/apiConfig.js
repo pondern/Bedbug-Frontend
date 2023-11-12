@@ -4,7 +4,7 @@ let apiUrl;
 
 const apiUrls = {
   production: "https://bedbug-api-31cb0e20044f.herokuapp.com/buildings",
-  development: "http://localhost:3000/api",
+  development: "http://localhost:3000/",
 };
 
 if (window.location.hostname === "localhost") {
