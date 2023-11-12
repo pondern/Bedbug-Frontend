@@ -4,7 +4,7 @@ function Nav() {
   return (
     <nav>
       <NavLink to="/">Home</NavLink>
-      <Navlink to="/buildings">All Buildings</Navlink>
+      <NavLink to="/buildings">All Buildings</NavLink>
       <NavLink to="/add-building">Add New Building!</NavLink>
     </nav>
   );
