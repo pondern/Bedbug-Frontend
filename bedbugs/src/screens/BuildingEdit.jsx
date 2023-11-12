@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { editBuilding, getBuilding } from "../services/buildings";
 
 function BuildingEdit() {
-  const [cat, setBuilding] = useState({
+  const [building, setBuilding] = useState({
     name: "",
   });
 
@@ -28,25 +28,26 @@ function BuildingEdit() {
   };
 
   const handleChange = (e) => {
-    const { bldgadd, value } = e.target;
+    const { name, value } = e.target;
 
     setBuilding((prevBuilding) => ({
       ...prevBuilding,
-      [bldgadd]: value,
+      [name]: value,
     }));
   };
 
   return (
     <div>
-      <h1>Add a building in our Database!</h1>
-      <form className="create-form" onSubmit={handleSubmit}>
+      <h1>Edit Building Information</h1>
+      <form className="edit-form" onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Please add your building's adress"
-          bldgadd="address"
-          value={building.bldgadd}
+          placeholder="Please add your building's name"
+          name="name"
+          value={building.name}
           onChange={handleChange}
         />
+        <button type="submit">Save Changes</button>
       </form>
     </div>
   );

@@ -1,46 +1,56 @@
-import api from "./apiConfig.js";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { editBuilding, getBuilding } from "../services/buildings";
 
-export const getBuildings = async () => {
-  try {
-    const response = await api.get("/buildings");
-    return response.data;
-  } catch (error) {
-    console.error("Error: Getting all Buildings: ", error);
-  }
-};
+function BuildingEdit() {
+  const [building, setBuilding] = useState({
+    name: "",
+  });
 
-export const getBuilding = async (id) => {
-  try {
-    const response = await api.get(`/buildings/${id}`);
-    return response.data;
-  } catch (error) {
-    console.error("Error: Getting one Building: ", error);
-  }
-};
+  let { id } = useParams();
+  console.log(id);
+  let navigate = useNavigate();
 
-export const createBuilding = async (buildingData) => {
-  try {
-    const response = await api.post("/buildings", buildingData);
-    return response.data;
-  } catch (error) {
-    console.log(error);
-  }
-};
+  useEffect(() => {
+    fetchBuilding();
+  }, []);
 
-export const editBuilding = async (id, buildingData) => {
-  try {
-    const response = await api.put(`/buildings/${id}`, buildingData);
-    return response.data;
-  } catch (error) {
-    console.error(error);
+  async function fetchBuilding() {
+    const oneBuilding = await getBuilding(id);
+    setBuilding(oneBuilding);
   }
-};
 
-export const deleteBuilding = async (id) => {
-  try {
-    const response = await api.delete(`/buildings/${id}`);
-    return response.data;
-  } catch (error) {
-    console.error(error);
-  }
-};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    await editBuilding(id, building);
+    navigate(`/buildings/${id}`);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setBuilding((prevBuilding) => ({
+      ...prevBuilding,
+      [name]: value,
+    }));
+  };
+
+  return (
+    <div>
+      <h1>Edit Building Information</h1>
+      <form className="edit-form" onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Please add your building's name"
+          name="name"
+          value={building.name}
+          onChange={handleChange}
+        />
+        <button type="submit">Save Changes</button>
+      </form>
+    </div>
+  );
+}
+
+export default BuildingEdit;
