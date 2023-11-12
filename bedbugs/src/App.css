@@ -2,6 +2,20 @@
   text-align: center;
 }
 
+.home {
+  font-size: 45px;
+}
+
+.building-photo {
+  height: 150px;
+  width: 150px;
+}
+
+.buildings-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
