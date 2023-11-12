@@ -1,56 +1,46 @@
-import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { editBuilding, getBuilding } from "../services/buildings";
+import api from "./apiConfig.js";
 
-function BuildingEdit() {
-  const [building, setBuilding] = useState({
-    name: "",
-  });
-
-  let { id } = useParams();
-  console.log(id);
-  let navigate = useNavigate();
-
-  useEffect(() => {
-    fetchBuilding();
-  }, []);
-
-  async function fetchBuilding() {
-    const oneBuilding = await getBuilding(id);
-    setBuilding(oneBuilding);
+export const getBuildings = async () => {
+  try {
+    const response = await api.get("/buildings");
+    return response.data;
+  } catch (error) {
+    console.error("Error: Getting all Buildings: ", error);
   }
+};
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+export const getBuilding = async (id) => {
+  try {
+    const response = await api.get(`/Buildings/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error: Getting one Building: ", error);
+  }
+};
 
-    await editBuilding(id, building);
-    navigate(`/buildings/${id}`);
-  };
+export const createBuilding = async (buildingData) => {
+  try {
+    const response = await api.post("/buildings", buildingData);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+export const editBuilding = async (id, buildingData) => {
+  try {
+    const response = await api.put(`/buildings/${id}`, buildingData);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-    setBuilding((prevBuilding) => ({
-      ...prevBuilding,
-      [name]: value,
-    }));
-  };
-
-  return (
-    <div>
-      <h1>Edit Building Information</h1>
-      <form className="edit-form" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Please add your building's name"
-          name="name"
-          value={building.name}
-          onChange={handleChange}
-        />
-        <button type="submit">Save Changes</button>
-      </form>
-    </div>
-  );
-}
-
-export default BuildingEdit;
+export const deleteBuilding = async (id) => {
+  try {
+    const response = await api.delete(`/buildings/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
