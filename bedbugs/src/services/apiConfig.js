@@ -1,20 +1,20 @@
 import axios from "axios";
 
-let apiURL;
+let apiUrl;
 
-const apiURLs = {
-  production: "",
+const apiUrls = {
+  production: "https://bedbug-api-31cb0e20044f.herokuapp.com/buildings",
   development: "http://localhost:3000/api",
 };
 
 if (window.location.hostname === "localhost") {
-  apiURL = apiURLs.development;
+  apiUrl = apiUrls.development;
 } else {
-  apiURL = apiURLs.production;
+  apiUrl = apiUrls.production;
 }
 
 const api = axios.create({
-  baseURL: apiURL,
+  baseURL: apiUrl,
 });
 
 export default api;
