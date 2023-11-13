@@ -21,17 +21,20 @@ function BuildingEdit() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await editBuilding(id, building);
+    await editBuilding(id, building.building);
     navigate(`/buildings/${id}`);
   };
 
   const handleChange = (e) => {
     const { bldgadd, value } = e.target;
 
-    setBuilding((prevBuilding) => ({
-      ...prevBuilding,
-      [bldgadd]: value,
-    }));
+    setBuilding((prevBuilding) => {
+      let x = {
+        ...prevBuilding,
+      };
+      x.building.bldgadd = value;
+      return x;
+    });
   };
 
   return (
