@@ -31,7 +31,7 @@ function BuildingCreate() {
       <form className="create-form" onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Please add your building's adress"
+          placeholder="Please add your building's address"
           bldgadd="address"
           value={building.bldgadd}
           onChange={handleChange}

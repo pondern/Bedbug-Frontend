@@ -3,9 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { editBuilding, getBuilding } from "../services/buildings";
 
 function BuildingEdit() {
-  const [building, setBuilding] = useState({
-    name: "",
-  });
+  const [building, setBuilding] = useState({});
 
   let { id } = useParams();
   console.log(id);
@@ -28,11 +26,11 @@ function BuildingEdit() {
   };
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { bldgadd, value } = e.target;
 
     setBuilding((prevBuilding) => ({
       ...prevBuilding,
-      [name]: value,
+      [bldgadd]: value,
     }));
   };
 
@@ -44,7 +42,7 @@ function BuildingEdit() {
           type="text"
           placeholder="Please add your building's name"
           name="name"
-          value={building.name}
+          value={building.building?.bldgadd}
           onChange={handleChange}
         />
         <button type="submit">Save Changes</button>

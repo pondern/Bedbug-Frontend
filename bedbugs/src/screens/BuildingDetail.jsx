@@ -24,10 +24,12 @@ function BuildingDetail() {
 
   return (
     <div>
-      <h1>Hello, I'm {building.name}</h1>
-      <h2>{building.aka}</h2>
-      <img src={building.photo} alt={building.name} />
-      {/* {building.likesCuddles ? <p>I love me some cuddles!</p> : <p>Get the heck away from me!</p>} */}
+      <h1>Hello, I'm Located at {building.building?.bldgadd}</h1>
+      <h2>
+        I have {building.bedbug?.infested_dwelling_unit_count} infested units
+        out of a total of {building.bedbug?.of_dwelling_units} units
+      </h2>
+      <img src={building.building?.photo} alt="" />
       <div>
         <Link to={`/buildings/${id}/edit`}>
           <button>Edit Building</button>

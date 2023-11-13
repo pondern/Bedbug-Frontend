@@ -11,7 +11,7 @@ export const getBuildings = async () => {
 
 export const getBuilding = async (id) => {
   try {
-    const response = await api.get(`/Buildings/${id}`);
+    const response = await api.get(`/buildings/${id}`);
     return response.data;
   } catch (error) {
     console.error("Error: Getting one Building: ", error);
